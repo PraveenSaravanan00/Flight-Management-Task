@@ -1,0 +1,17 @@
+<div class="kpi-grid" *ngIf="stats$ | async as stats">
+  @for (card of cards; track card.value) {
+  <div class="kpi-card animate-fade-in-up" [class]="card.glow">
+    <div class="kpi-icon-wrap" [class]="card.gradient">
+      <i [class]="card.icon"></i>
+    </div>
+    <div class="kpi-content">
+      <div class="kpi-value">{{ stats[card.value] }}</div>
+      <div class="kpi-title">{{ card.title }}</div>
+      <div class="kpi-trend" [class.trend-up]="card.trendUp" [class.trend-down]="!card.trendUp">
+        <i [class]="card.trendUp ? 'pi pi-arrow-up' : 'pi pi-arrow-down'"></i>
+        {{ card.trend }}
+      </div>
+    </div>
+  </div>
+  }
+</div>

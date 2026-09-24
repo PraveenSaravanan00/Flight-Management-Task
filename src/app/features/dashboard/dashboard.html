@@ -1,0 +1,30 @@
+<div class="dashboard-shell">
+
+  <app-header />
+
+  <app-kpi-cards />
+
+  <div class="dashboard-main">
+
+    <button class="hamburger-btn" (click)="toggleSidebar()" id="mobile-sidebar-toggle">
+      <i class="pi pi-bars"></i>
+    </button>
+
+    <aside class="sidebar-pane" [class.sidebar-open]="sidebarOpen">
+      <app-sidebar />
+    </aside>
+
+    @if (sidebarOpen) {
+    <div class="sidebar-overlay" (click)="toggleSidebar()"></div>
+    }
+
+    <main class="map-pane">
+      <app-flight-map />
+    </main>
+
+    <aside class="detail-pane">
+      <app-flight-detail />
+    </aside>
+
+  </div>
+</div>

@@ -1,1 +1,40 @@
-<p>header works!</p>
+<header class="app-header">
+  <div class="header-brand">
+    <div class="logo-icon">
+      <i class="pi pi-send"></i>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">AeroTrack</span>
+      <span class="brand-subtitle">Flight Operations Dashboard</span>
+    </div>
+  </div>
+
+  <div class="header-center">
+    <div class="live-indicator">
+      <span class="live-dot"></span>
+      <span class="live-label">LIVE</span>
+    </div>
+    <div class="divider-v"></div>
+    <div class="utc-clock">
+      <i class="pi pi-clock"></i>
+      <span class="clock-time font-mono">{{ currentTime }}</span>
+    </div>
+    <div class="divider-v"></div>
+    <div class="connection-status">
+      <i class="pi pi-wifi" style="color: #22c55e"></i>
+      <span class="status-label">Connected</span>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button
+      class="icon-btn"
+      (click)="toggleTheme()"
+      pTooltip="{{ isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}"
+      tooltipPosition="bottom"
+      id="theme-toggle-btn"
+    >
+      <i [class]="isDark ? 'pi pi-sun' : 'pi pi-moon'"></i>
+    </button>
+  </div>
+</header>

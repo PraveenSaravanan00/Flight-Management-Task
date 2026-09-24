@@ -1,0 +1,144 @@
+.dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+app-kpi-cards {
+  display: block;
+  flex-shrink: 0;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar-pane {
+  width: 320px;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.map-pane {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.detail-pane {
+  width: 360px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.hamburger-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.hamburger-btn:hover {
+  background: var(--border-color);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 49;
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 1279px) {
+  .detail-pane {
+    width: 300px;
+  }
+
+  .sidebar-pane {
+    width: 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-main {
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  .sidebar-pane {
+    width: 280px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .map-pane {
+    flex: none;
+    width: calc(100% - 280px);
+    height: 55%;
+  }
+
+  .detail-pane {
+    flex: none;
+    width: calc(100% - 280px);
+    height: 45%;
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .sidebar-pane {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    bottom: 0;
+    width: 300px;
+    height: auto;
+    transform: translateX(-100%);
+    z-index: 200;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .sidebar-pane.sidebar-open {
+    transform: translateX(0);
+    animation: slide-in-left 0.3s ease-out;
+  }
+
+  .map-pane {
+    flex: none;
+    width: 100%;
+    height: 55%;
+  }
+
+  .detail-pane {
+    flex: none;
+    width: 100%;
+    height: 45%;
+    border-top: 1px solid var(--border-color);
+  }
+}

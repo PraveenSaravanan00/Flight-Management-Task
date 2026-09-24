@@ -1,0 +1,42 @@
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-active {
+    background: #22c55e;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.dot-delayed {
+    background: #f59e0b;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.dot-arrived {
+    background: #3b82f6;
+}
+
+.dot-cancelled {
+    background: #ef4444;
+}
+
+.dot-boarding {
+    background: #a855f7;
+    animation: pulse-dot 2s ease-in-out infinite;
+}

@@ -1,0 +1,137 @@
+@if (isPage && flight) {
+  <div class="detail-page">
+    <div class="page-header">
+      <button class="back-btn" (click)="goBack()">
+        <i class="pi pi-arrow-left"></i> Back to Dashboard
+      </button>
+    </div>
+    <div class="detail-content">
+      <ng-container *ngTemplateOutlet="detailBody" />
+    </div>
+  </div>
+}
+
+@if (!isPage) {
+  @if (flight) {
+    <div class="detail-panel animate-slide-in-right">
+      <div class="panel-close" (click)="close()" id="close-detail-panel">
+        <i class="pi pi-times"></i>
+      </div>
+      <ng-container *ngTemplateOutlet="detailBody" />
+    </div>
+  } @else {
+    <div class="detail-placeholder">
+      <div class="placeholder-content">
+        <div class="placeholder-icon">
+          <i class="pi pi-map-marker"></i>
+        </div>
+        <h3>Select a Flight</h3>
+        <p>Click on any flight marker on the map or select a flight from the list to view its details.</p>
+      </div>
+    </div>
+  }
+}
+
+<ng-template #detailBody>
+  @if (flight) {
+    <div class="detail-inner">
+      <div class="flight-header-card">
+        <div class="fh-top">
+          <div class="fh-number">
+            <i class="pi pi-send"></i>
+            <span>{{ flight.flightNumber }}</span>
+          </div>
+          <app-status-badge [status]="flight.status" />
+        </div>
+        <div class="fh-callsign">{{ flight.callsign }}</div>
+        <div class="fh-aircraft">
+          <i class="pi pi-cog"></i>
+          {{ flight.aircraftType }}
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="section-label">
+          <i class="pi pi-map"></i> Route
+        </div>
+        <div class="route-visual">
+          <div class="airport-block">
+            <div class="ap-code">{{ flight.origin.code }}</div>
+            <div class="ap-city">{{ flight.origin.city }}</div>
+            <div class="ap-name">{{ flight.origin.name }}</div>
+            <div class="ap-country">{{ flight.origin.country }}</div>
+          </div>
+          <div class="route-line">
+            <div class="route-line-inner"></div>
+            <i class="pi pi-send route-plane-icon"></i>
+          </div>
+          <div class="airport-block text-right">
+            <div class="ap-code">{{ flight.destination.code }}</div>
+            <div class="ap-city">{{ flight.destination.city }}</div>
+            <div class="ap-name">{{ flight.destination.name }}</div>
+            <div class="ap-country">{{ flight.destination.country }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="section-label">
+          <i class="pi pi-calendar"></i> Schedule
+        </div>
+        <div class="schedule-grid">
+          <div class="schedule-item">
+            <div class="sch-label">Departure</div>
+            <div class="sch-time">{{ formatTime(flight.estimatedDeparture) }}</div>
+            <div class="sch-date">{{ formatDateTime(flight.estimatedDeparture) }}</div>
+          </div>
+          <div class="schedule-divider">
+            <i class="pi pi-arrow-right"></i>
+          </div>
+          <div class="schedule-item">
+            <div class="sch-label">Arrival</div>
+            <div class="sch-time">{{ formatTime(flight.estimatedArrival) }}</div>
+            <div class="sch-date">{{ formatDateTime(flight.estimatedArrival) }}</div>
+          </div>
+        </div>
+      </div>
+
+      @if (flight.status === 'Active' || flight.status === 'Delayed') {
+        <div class="detail-section">
+          <div class="section-label">
+            <i class="pi pi-chart-bar"></i> Flight Data
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value font-mono">{{ flight.altitude.toLocaleString() }}</div>
+              <div class="stat-label">Altitude (ft)</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value font-mono">{{ flight.speed }}</div>
+              <div class="stat-label">Speed (kts)</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value font-mono">{{ flight.heading }}°</div>
+              <div class="stat-label">Heading</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <div class="detail-section">
+        <div class="section-label">
+          <i class="pi pi-map-marker"></i> Current Position
+        </div>
+        <div class="position-data">
+          <div class="pos-item">
+            <span class="pos-label">Latitude</span>
+            <span class="pos-val font-mono">{{ flight.currentLat.toFixed(4) }}°</span>
+          </div>
+          <div class="pos-item">
+            <span class="pos-label">Longitude</span>
+            <span class="pos-val font-mono">{{ flight.currentLng.toFixed(4) }}°</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</ng-template>

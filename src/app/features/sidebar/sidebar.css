@@ -1,0 +1,251 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+}
+
+
+.sidebar-header {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sidebar-title i {
+  color: var(--accent-blue);
+}
+
+.flight-count {
+  margin-left: auto;
+  background: var(--accent-blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.filters-section {
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 32px 8px 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.clear-search {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+.clear-search:hover {
+  color: #ef4444;
+}
+
+.filter-row {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-row ::ng-deep .p-dropdown,
+.filter-row ::ng-deep .filter-drop {
+  width: 100% !important;
+}
+
+.filter-row.two-col ::ng-deep .p-dropdown {
+  flex: 1;
+}
+
+.reset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-primary);
+}
+
+.reset-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.flight-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+  flex: 1;
+}
+
+.flight-item {
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.flight-item:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.flight-item.selected {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.flight-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.flight-number {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flight-icon {
+  font-size: 13px;
+}
+
+.fn-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.flight-route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.airport-code {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+.route-arrow {
+  color: var(--text-muted);
+  font-size: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+.flight-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.meta-item i {
+  font-size: 10px;
+}

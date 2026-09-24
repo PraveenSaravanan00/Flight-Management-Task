@@ -1,0 +1,84 @@
+<div class="sidebar-container">
+
+  <div class="sidebar-header">
+    <div class="sidebar-title">
+      <i class="pi pi-list"></i>
+      <span>Flights</span>
+      <span class="flight-count">{{ flights.length }}</span>
+    </div>
+  </div>
+
+  <form [formGroup]="filterForm" class="filters-section">
+
+    <div class="search-wrap">
+      <i class="pi pi-search search-icon"></i>
+      <input id="callsign-search" pInputText type="text" class="search-input" placeholder="Search callsign or flight..."
+        formControlName="search" autocomplete="off" />
+      @if (filterForm.get('search')?.value) {
+      <button class="clear-search" type="button" (click)="filterForm.get('search')?.setValue('')">
+        <i class="pi pi-times"></i>
+      </button>
+      }
+    </div>
+
+    <div class="filter-row">
+      <p-dropdown id="status-filter" [options]="statusOptions" formControlName="status" optionLabel="label"
+        optionValue="value" placeholder="All Statuses" styleClass="filter-drop" [appendTo]="'body'" />
+    </div>
+
+    <div class="filter-row two-col">
+      <p-dropdown id="origin-filter" [options]="originOptions" formControlName="origin" optionLabel="label"
+        optionValue="value" placeholder="Origin" styleClass="filter-drop" [filter]="true" filterPlaceholder="Search..."
+        [appendTo]="'body'" />
+      <p-dropdown id="dest-filter" [options]="destOptions" formControlName="destination" optionLabel="label"
+        optionValue="value" placeholder="Dest" styleClass="filter-drop" [filter]="true" filterPlaceholder="Search..."
+        [appendTo]="'body'" />
+    </div>
+
+    @if (filterForm.dirty) {
+    <button type="button" class="reset-btn" (click)="resetFilters()">
+      <i class="pi pi-refresh"></i>
+      Reset Filters
+    </button>
+    }
+  </form>
+
+  <div class="flight-list">
+    @if (flights.length === 0) {
+    <div class="empty-state">
+      <i class="pi pi-search" style="font-size:28px; color: var(--text-muted)"></i>
+      <p>No flights match your filters</p>
+    </div>
+    }
+
+    @for (flight of flights; track flight.id) {
+    <div class="flight-item" [class.selected]="isSelected(flight)" (click)="selectFlight(flight)"
+      [id]="'flight-item-' + flight.id">
+      <div class="flight-item-header">
+        <div class="flight-number">
+          <i class="pi pi-send flight-icon" [class]="getStatusClass(flight.status)"></i>
+          <span class="fn-text">{{ flight.flightNumber }}</span>
+        </div>
+        <app-status-badge [status]="flight.status" />
+      </div>
+
+      <div class="flight-route">
+        <span class="airport-code">{{ flight.origin.code }}</span>
+        <span class="route-arrow"><i class="pi pi-arrow-right"></i></span>
+        <span class="airport-code">{{ flight.destination.code }}</span>
+      </div>
+
+      <div class="flight-meta">
+        <span class="meta-item">
+          <i class="pi pi-clock"></i>
+          {{ formatTime(flight.estimatedDeparture) }}
+        </span>
+        <span class="meta-item">
+          <i class="pi pi-tag"></i>
+          {{ flight.callsign }}
+        </span>
+      </div>
+    </div>
+    }
+  </div>
+</div>

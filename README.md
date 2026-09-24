@@ -1,59 +1,111 @@
-# FlightManagementTask
+# Flight Tracking & Operations Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+A responsive flight operations dashboard built with Angular, PrimeNG, Tailwind CSS, and Leaflet Maps. Designed for aviation operations personnel to monitor live flights, view routes, and track operational KPIs.
 
-## Development server
+---
 
-To start a local development server, run:
+## Tech Stack
 
-```bash
-ng serve
-```
+- **Angular 21** — standalone components, reactive forms, lazy routing
+- **PrimeNG 17** — UI components (dropdowns, buttons, inputs)
+- **Tailwind CSS v4** — layout and utility styling
+- **Leaflet** — interactive flight map
+- **RxJS** — state management via BehaviorSubjects
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+- Node.js 18+
+- npm 9+
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Install
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Run
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+Open [http://localhost:4200](http://localhost:4200) — the app loads directly on the dashboard.
 
-For end-to-end (e2e) testing, run:
+---
+
+## Scripts
 
 ```bash
-ng e2e
+npm start          # development server
+npm run build      # production build
+npm test           # run unit tests
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Project Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+src/app/
+├── core/
+│   ├── models/         # TypeScript interfaces (Flight, Airport, FilterState)
+│   └── services/       # FlightService (state + filters), ThemeService (dark mode)
+├── data/
+│   └── mock-data.ts    # 20 mock flights with real airport coordinates
+├── features/
+│   ├── dashboard/      # Main shell layout
+│   ├── flight/         # Leaflet map component
+│   ├── flight-detail/  # Flight info panel and detail page
+│   ├── kpi-cards/      # Stats overview row
+│   └── sidebar/        # Search, filters, flight list
+└── shared/
+    └── components/
+        ├── header/         # Top nav with live UTC clock
+        └── status-badge/   # Reusable status indicator
+```
+
+---
+
+## Features
+
+- **Interactive map** with custom airplane markers rotated by heading
+- **Click a flight** to highlight its route, draw origin→destination polyline, and open the detail panel
+- **Search** by callsign or flight number (debounced)
+- **Filter** by status, origin, and destination airport
+- **KPI cards** — total, active, delayed, arrived, cancelled, boarding counts
+- **Dark / Light mode** toggle — switches map tiles and the full UI theme
+- **Responsive** — sidebar collapses to a drawer on smaller screens
+
+---
+
+## Routes
+
+| Path | Page |
+|------|------|
+| `/dashboard` | Main operations view |
+| `/flight/:id` | Full flight detail page |
+
+---
+
+## Mock Data
+
+The app uses 20 fictional flights across real airports — DEL, BOM, BLR, MAA, HYD, CCU, DXB, SIN, LHR, JFK, CDG, NRT and more. No backend is required.
+
+---
+
+## Testing
+
+Unit tests cover the core service logic and key components:
+
+```bash
+npm test
+```
+
+- `FlightService` — filter logic, KPI computation, selection state
+- `ThemeService` — toggle behavior
+- `StatusBadgeComponent` — correct CSS class per status
+- Component creation tests for Dashboard, Sidebar, FlightDetail
